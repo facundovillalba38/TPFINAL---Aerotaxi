@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Plane;
 
 public class Plane {
     private double fuelCapacity;

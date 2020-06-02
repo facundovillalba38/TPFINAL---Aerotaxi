@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Flight;
+
+import com.company.Plane;
 
 import java.util.Date;
 

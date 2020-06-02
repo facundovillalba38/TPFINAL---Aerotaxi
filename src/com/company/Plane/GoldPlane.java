@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Plane;
 
 public class GoldPlane extends Plane {
     private Boolean catering;
