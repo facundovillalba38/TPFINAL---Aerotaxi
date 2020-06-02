@@ -1,10 +1,12 @@
-package com.company.Plane;
+package com.company.plane;
 
 public class Plane {
     private double fuelCapacity;
     private double costKm;
     private double maxSpeed;
     private String engineType;
+    private int passengerCapacity;
+    private double planeFare;
 
     public Plane(){
 
