@@ -1,8 +1,8 @@
-package com.company;
+package com.company.plane;
 
 public class BronzePlane extends Plane {
 
-    public BronzePlane(double fuelCapacity, double costKm, double maxSpeed, String engineType) {
-        super(fuelCapacity, costKm, maxSpeed, engineType);
+    public BronzePlane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers) {
+        super(fuelCapacity, costKm, maxSpeed, engineType, passengers);
     }
 }
