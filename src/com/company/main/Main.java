@@ -9,7 +9,7 @@ import com.company.user.User;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
 
         User u = new User();
         Company c = new Company();
@@ -28,7 +28,7 @@ public class Main {
 
         Flight f = c.getFlightByUserDNI(u.getDni());
         System.out.println("Usuario del vuelo: " + f.getClient().getName() + " " + f.getClient().getSurname());
-        System.out.println(f.getTotalCost());
+        System.out.println("Costo total del vuelo: $"+f.getTotalCost());
 
 
     }
