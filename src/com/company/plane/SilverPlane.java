@@ -24,6 +24,11 @@ public class SilverPlane extends Plane{
     public static void setFare(double fare) {
         SilverPlane.fare = fare;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\nTipo Silver - Catering: Sí - Wifi: No";
+    }
 }
 
 

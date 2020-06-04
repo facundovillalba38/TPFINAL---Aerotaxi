@@ -1,5 +1,8 @@
 package com.company.user;
 
+import com.company.company.Company;
+import com.company.flight.Flight;
+
 import java.util.Scanner;
 
 public class User {
@@ -69,14 +72,21 @@ public class User {
         this.setAge(age);
     }
 
-    public void hireFlight(){
+    public void hireFlight(Company c){
 
-        //TODO call method in class Flight
+        Flight f = new Flight();
+        f.bookFlight(c, this);
     }
 
     public void cancelFlight(){
 
         //TODO cancell flight
+    }
+
+    @Override
+    public String toString(){
+        return "Usuario: " + this.getName() + " " + this.getSurname() + " - DNI: " + this.getDni()
+                + " - Edad: " + this.getAge();
     }
 }
 

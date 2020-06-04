@@ -14,4 +14,9 @@ public class BronzePlane extends Plane {
     public static void setFare(double fare) {
         BronzePlane.fare = fare;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\nTipo Bronze - Catering: No - Wifi: No";
+    }
 }

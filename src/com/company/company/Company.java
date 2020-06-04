@@ -4,6 +4,7 @@ import com.company.flight.Flight;
 import com.company.plane.Plane;
 import com.company.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Company {
@@ -11,7 +12,11 @@ public class Company {
     private List<Plane>planes;
     private List<Flight>flights;
 
-    public Company(){}
+    public Company(){
+        this.users = new ArrayList<>();
+        this.planes = new ArrayList<>();
+        this.flights = new ArrayList<>();
+    }
 
 
 
@@ -47,6 +52,24 @@ public class Company {
         }
     }
 
+    public void showFreePlaneList(){
+        for(Plane p : planes){
+            if(p.isBusy() == false){
+                System.out.println(p);
+            }
+        }
+    }
+
+    public Plane getPlaneById(String planeId){
+        Plane selectedPlane = new Plane();
+        for(Plane p : planes){
+            if(p.getId().equals(planeId)){
+                selectedPlane = p;
+            }
+        }
+        return selectedPlane;
+    }
+
     //FLIGHTS
 
     public void addFlight(Flight f){
@@ -62,4 +85,16 @@ public class Company {
             System.out.println(f);
         }
     }
+
+    public Flight getFlightByUserDNI(int dni){
+        Flight f = new Flight();
+        for(Flight flight : flights){
+            if(flight.getClient().getDni() == dni){
+                f = flight;
+            }
+        }
+        return f;
+    }
+
+
 }

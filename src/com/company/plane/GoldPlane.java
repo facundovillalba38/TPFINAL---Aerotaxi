@@ -5,6 +5,8 @@ public class GoldPlane extends Plane {
     private Boolean wifi;
     private static double fare = 6000;
 
+    public GoldPlane(){}
+
     public GoldPlane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, Boolean wifi) {
         super(fuelCapacity, costKm, maxSpeed, engineType, passengers, fare);
         this.catering = true;
@@ -33,5 +35,10 @@ public class GoldPlane extends Plane {
 
     public static void setFare(double fare) {
         GoldPlane.fare = fare;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\nTipo Gold - Catering: Sí - Wifi: Sí";
     }
 }

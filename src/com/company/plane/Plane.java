@@ -1,22 +1,32 @@
 package com.company.plane;
 
+import java.util.UUID;
+
 public class Plane {
+    private UUID id;
     private double fuelCapacity;
     private double costKm;
     private double maxSpeed;
     private String engineType;
     private int passengerCapacity;
     private double planeFare;
+    private boolean busy;
 
     public Plane(){}
 
     public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare) {
+        this.id = UUID.randomUUID();
         this.fuelCapacity = fuelCapacity;
         this.costKm = costKm;
         this.maxSpeed = maxSpeed;
         this.engineType = engineType;
         this.passengerCapacity = passengers;
         this.planeFare = planeFare;
+        this.busy = false;
+    }
+
+    public UUID getId(){
+        return id;
     }
 
     public double getFuelCapacity() {
@@ -65,5 +75,20 @@ public class Plane {
 
     public void setPlaneFare(double planeFare) {
         this.planeFare = planeFare;
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setBusy(boolean busy) {
+        this.busy = busy;
+    }
+
+
+    @Override
+    public String toString(){
+        return "Avión ID: " + this.getId() + " - Cantidad pasajeros máxima: " + this.getPassengerCapacity() +
+                " - Ocupado: " + this.isBusy();
     }
 }

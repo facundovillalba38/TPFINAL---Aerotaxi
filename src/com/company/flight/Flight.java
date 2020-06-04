@@ -1,9 +1,11 @@
 package com.company.flight;
 
+import com.company.company.Company;
 import com.company.plane.Plane;
 import com.company.user.User;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Flight {
     private User client;
@@ -57,9 +59,9 @@ public class Flight {
 
     public void setPassengers(int passengers) {
         // Si los pasajeros exceden la capacidad del avion
-        if(this.planeCategory.getPassengerCapacity() < passengers){
+        /*if(this.planeCategory.getPassengerCapacity() < passengers){
             System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
-        }
+        }*/
         this.passengers = passengers;
     }
 
@@ -75,11 +77,11 @@ public class Flight {
         return totalCost;
     }
 
-    public void calculateTotalCost(){
+    private void calculateTotalCost(){
         this.totalCost = (calculateDistance(this.originDestination, this.finalDestination)*this.planeCategory.getCostKm()) + (this.passengers * 3500) + this.planeCategory.getPlaneFare();
     }
 
-    public double calculateDistance(Destination destination1, Destination destination2){
+    private double calculateDistance(Destination destination1, Destination destination2){
         double distance = 0.0;
         if((destination1.equals(originDestination.BUENOSAIRES) && destination2.equals(finalDestination.CORDOBA))||
                 (destination1.equals(originDestination.CORDOBA) && destination2.equals(finalDestination.BUENOSAIRES))){
@@ -104,6 +106,40 @@ public class Flight {
         return distance;
     }
 
+    public void bookFlight(Company c, User u){
+
+        this.setClient(u);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingresar fecha de viaje (yyyy-mm-dd):");
+        String departureDate = scanner.nextLine();
+        this.setDepartureDate(LocalDate.parse(departureDate));
+
+        System.out.println("Ingrese origen del viaje:");
+        String originCity = scanner.nextLine();
+        this.setOriginDestination(Destination.valueOf(originCity.toUpperCase()));
+
+        System.out.println("Ingrese destino del viaje:");
+        String destinyCity = scanner.nextLine();
+        this.setFinalDestination(Destination.valueOf(destinyCity.toUpperCase()));
+
+        System.out.println("Ingrese la cantidad de acompañantes:");
+        int companion = scanner.nextInt();
+        companion++;
+        this.setPassengers(companion);
+
+        System.out.println("Listado flota:");
+        c.showPlaneList();
+
+        System.out.println("Ingrese ID del avión:");
+        String planeId = scanner.next();
+        this.setPlaneCategory(c.getPlaneById(planeId));
+
+        this.calculateTotalCost();
+
+        c.addFlight(this);
+    }
 
 
 }
