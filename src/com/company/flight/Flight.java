@@ -135,9 +135,25 @@ public class Flight {
         String planeId = scanner.next();
         this.setPlaneCategory(c.getPlaneById(planeId));
 
-        System.out.println("Ingrese la cantidad de acompañantes:");
+        /*System.out.println("Ingrese la cantidad de acompañantes:");
         int companion = scanner.nextInt();
         companion++;
+        this.setPassengers(companion);*/
+
+        int companion = 0;
+        do {
+
+             System.out.println("Ingrese la cantidad de acompañantes: pasajeros:"+getPlaneCategory().toString());
+            while (!scanner.hasNextInt()) {
+                String input = scanner.next();
+                System.out.printf("\"%s\" no es un numero valido.\n", input);
+            }
+            companion = scanner.nextInt();
+            companion++;
+            if(companion > this.getPlaneCategory().getPassengerCapacity()){
+                System.out.println("La cantidad de acompañantes no puede superar la capacidad maxima de pasajeros del avion");
+            }
+        } while (companion > this.getPlaneCategory().getPassengerCapacity());
         this.setPassengers(companion);
 
         this.calculateTotalCost();
