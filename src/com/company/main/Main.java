@@ -6,12 +6,15 @@ import com.company.plane.GoldPlane;
 import com.company.plane.Plane;
 import com.company.user.User;
 
+import javax.swing.*;
+import java.awt.event.WindowEvent;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+	// write your code here
 
-
-        User u = new User();
+        /*User u = new User();
         Company c = new Company();
 
         GoldPlane gold1 = new GoldPlane(1000,300,950,"motor",10,true);
@@ -28,7 +31,19 @@ public class Main {
 
         Flight f = c.getFlightByUserDNI(u.getDni());
         System.out.println("Usuario del vuelo: " + f.getClient().getName() + " " + f.getClient().getSurname());
-        System.out.println("Costo total del vuelo: $"+f.getTotalCost());
+        System.out.println(f.getTotalCost());*/
+
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new MainWindow();
+                frame.setSize(500,500);
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
+            }
+        });
 
 
     }

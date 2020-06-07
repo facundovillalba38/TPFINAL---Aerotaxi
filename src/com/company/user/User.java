@@ -72,6 +72,13 @@ public class User {
         this.setAge(age);
     }
 
+    public void registerUserSwing(String name, String surname, int dni, int age){
+        this.setName(name);
+        this.setSurname(surname);
+        this.setDni(dni);
+        this.setAge(age);
+    }
+
     public void hireFlight(Company c){
 
         Flight f = new Flight();
