@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="planePanel" layout-manager="GridLayoutManager" row-count="8" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="40" bottom="40" right="40"/>
     <constraints>
-      <xy x="20" y="20" width="524" height="413"/>
+      <xy x="20" y="20" width="544" height="413"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -49,7 +49,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="3e7d4" class="javax.swing.JRadioButton" binding="goldRadioButton" default-binding="true">
+          <component id="3e7d4" class="javax.swing.JRadioButton" binding="goldBtn">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -57,7 +57,7 @@
               <text value="Gold"/>
             </properties>
           </component>
-          <component id="8cf4f" class="javax.swing.JRadioButton" binding="silverRadioButton" default-binding="true">
+          <component id="8cf4f" class="javax.swing.JRadioButton" binding="silverBtn">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -65,7 +65,7 @@
               <text value="Silver"/>
             </properties>
           </component>
-          <component id="3237" class="javax.swing.JRadioButton" binding="bronzeRadioButton" default-binding="true">
+          <component id="3237" class="javax.swing.JRadioButton" binding="bronzeBtn">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -147,7 +147,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="4bdca" class="javax.swing.JCheckBox" binding="síCheckBox" default-binding="true">
+          <component id="960d1" class="javax.swing.JRadioButton" binding="yesWifiBtn">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -155,7 +155,7 @@
               <text value="Sí"/>
             </properties>
           </component>
-          <component id="e3f6c" class="javax.swing.JCheckBox" binding="noCheckBox" default-binding="true">
+          <component id="b0775" class="javax.swing.JRadioButton" binding="noWifiBtn">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
