@@ -7,6 +7,7 @@ import com.company.plane.Plane;
 import com.company.user.User;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 public class Main {
 
@@ -37,10 +38,13 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new Window();
+                JFrame frame = new MainWindow();
                 frame.setSize(500,500);
                 frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
             }
         });
+
+
     }
 }
