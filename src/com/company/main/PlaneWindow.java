@@ -1,6 +1,12 @@
 package com.company.main;
 
+import com.company.plane.BronzePlane;
+import com.company.plane.GoldPlane;
+import com.company.plane.SilverPlane;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlaneWindow extends JFrame {
     private JPanel planePanel;
@@ -16,6 +22,7 @@ public class PlaneWindow extends JFrame {
     private JRadioButton yesWifiBtn;
     private JRadioButton noWifiBtn;
     private JButton registerPlaneBtn;
+    private JButton planeListBtn;
 
 
     public PlaneWindow(){
@@ -32,5 +39,97 @@ public class PlaneWindow extends JFrame {
         wifiGroup.add(yesWifiBtn);
         wifiGroup.add(noWifiBtn);
 
+
+
+        registerPlaneBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                String fuelCapacitiy = fuelTxt.getText();
+                double costKm = 300;
+                String maxSpeed = speedTxt.getText();
+                String engineType = engineTxt.getText();
+                String passengers = passengersTxt.getText();
+                boolean wifi = validateWifi();
+
+                try {
+                    if(fuelTxt.getText().isEmpty() || engineTxt.getText().isEmpty() || speedTxt.getText().isEmpty() || passengersTxt.getText().isEmpty() || !yesWifiBtn.isSelected() || !noWifiBtn.isSelected()){
+
+                        //Method to generate a new plane instance
+                        createPlane(fuelCapacitiy, costKm, maxSpeed, engineType, passengers, wifi);
+
+                    } throw new CompleteAllFieldsException(goldBtn, silverBtn, bronzeBtn, fuelTxt, speedTxt, engineTxt, passengersTxt, yesWifiBtn, noWifiBtn);
+
+                } catch (CompleteAllFieldsException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        });
+
+
+        planeListBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println("TODO show plane list");
+
+            }
+        });
+    }
+
+
+    private void createPlane(String fuel, double costKm, String speed, String engine, String passengers, boolean wifi){
+        boolean error = false;
+        int pass;
+        double fuelCapacity, maxSpeed;
+        try {
+
+            pass = Integer.parseInt(passengers);
+            fuelCapacity = Double.parseDouble(fuel);
+            maxSpeed = Double.parseDouble(speed);
+
+        } catch (NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            error = true;
+            pass = 0;
+            fuelCapacity = 0;
+            maxSpeed = 0;
+        }
+        if(!error) {
+
+            if (goldBtn.isSelected()) {
+                GoldPlane goldPlane = new GoldPlane(fuelCapacity, costKm, maxSpeed, engine, pass, wifi);
+                System.out.println("GOLD Plane has been created.");
+                System.out.println(goldPlane);
+
+                //TODO add to GoldPlane List
+
+            } else if (silverBtn.isSelected()) {
+                SilverPlane silverPlane = new SilverPlane(fuelCapacity, costKm, maxSpeed, engine, pass);
+                System.out.println("SILVER Plane has been created.");
+                System.out.println(silverPlane);
+
+                //TODO add to SilverPlane List
+
+            } else if (bronzeBtn.isSelected()) {
+                BronzePlane bronzePlane = new BronzePlane(fuelCapacity, costKm, maxSpeed, engine, pass);
+                System.out.println("BRONZE Plane has been created.");
+                System.out.println(bronzePlane);
+
+                //TODO add to BronzePlane List
+            }
+
+        } else {
+            System.out.println("No se pudo crear avión.");
+        }
+
+    }
+
+
+
+    private boolean validateWifi(){
+        boolean wifi = yesWifiBtn.isSelected() ? true : false;
+        return wifi;
     }
 }
