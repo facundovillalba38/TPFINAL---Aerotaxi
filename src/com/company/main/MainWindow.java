@@ -9,9 +9,7 @@ public class MainWindow extends JFrame {
     private JButton goUserBtn;
     private JButton goPlaneBtn;
     private JButton goFlightBtn;
-
-
-
+    private JButton showFlightBtn;
 
 
     public MainWindow(){
@@ -48,6 +46,41 @@ public class MainWindow extends JFrame {
                         JFrame planeWindow = new PlaneWindow();
                         WindowSetting windowSetting = new WindowSetting();
                         windowSetting.windowSettings(planeWindow);
+                        dispose();
+                    }
+                });
+            }
+        });
+
+
+        goFlightBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame flightWindow = new FlightWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        //windowSetting.windowSettings(flightWindow);
+                        dispose();
+                    }
+                });
+            }
+        });
+
+
+
+        showFlightBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame showFlightWindow = new ShowFlightWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        windowSetting.windowSettings(showFlightWindow);
                         dispose();
                     }
                 });

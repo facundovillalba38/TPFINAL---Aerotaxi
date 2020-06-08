@@ -63,6 +63,7 @@ public class PlaneWindow extends JFrame {
 
                 } catch (CompleteAllFieldsException ex) {
                     System.out.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 } finally {
                     JOptionPane.showMessageDialog(null, "No se pudo crear avión.","Error" ,JOptionPane.ERROR_MESSAGE);
                 }
@@ -85,6 +86,7 @@ public class PlaneWindow extends JFrame {
         boolean error = false;
         int pass;
         double fuelCapacity, maxSpeed;
+
         try {
 
             pass = Integer.parseInt(passengers);
@@ -92,12 +94,12 @@ public class PlaneWindow extends JFrame {
             maxSpeed = Double.parseDouble(speed);
 
         } catch (NumberFormatException ex){
-            System.out.println(ex.getMessage());
             error = true;
             pass = 0;
             fuelCapacity = 0;
             maxSpeed = 0;
         }
+
         if(!error) {
 
             if (goldBtn.isSelected()) {
