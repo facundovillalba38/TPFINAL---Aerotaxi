@@ -8,17 +8,6 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="cd55f" class="javax.swing.JList" binding="userJlist">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <autoscrolls value="true"/>
-          <model/>
-        </properties>
-      </component>
       <component id="a7903" class="javax.swing.JLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -33,6 +22,17 @@
         </constraints>
         <properties>
           <text value="Mostrar Listado"/>
+        </properties>
+      </component>
+      <component id="cd55f" class="javax.swing.JList" binding="userJlist">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <autoscrolls value="true"/>
+          <model/>
         </properties>
       </component>
     </children>

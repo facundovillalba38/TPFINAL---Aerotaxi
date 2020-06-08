@@ -44,18 +44,18 @@ public class UserWindow extends JFrame {
 
         listUsersBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) {
 
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        JFrame userListWindow = new UserListWindow();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            JFrame userListWindow = new UserListWindow();
 
-                        WindowSetting windowSetting = new WindowSetting();
-                        windowSetting.windowSettings(userListWindow);
+                            WindowSetting windowSetting = new WindowSetting();
+                            windowSetting.windowSettings(userListWindow);
 
-                    }
-                });
+                        }
+                    });
 
             }
         });

@@ -1,5 +1,6 @@
 package com.company.main;
 
+import com.company.company.Company;
 import com.company.plane.BronzePlane;
 import com.company.plane.GoldPlane;
 import com.company.plane.SilverPlane;
@@ -74,8 +75,15 @@ public class PlaneWindow extends JFrame {
         planeListBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame planeListWindow = new PlaneListWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        windowSetting.windowSettings(planeListWindow);
 
-                System.out.println("TODO show plane list");
+                    }
+                });
 
             }
         });
@@ -106,20 +114,24 @@ public class PlaneWindow extends JFrame {
                 GoldPlane goldPlane = new GoldPlane(fuelCapacity, costKm, maxSpeed, engine, pass, wifi);
                 System.out.println("GOLD Plane has been created.");
                 System.out.println(goldPlane);
-
+                Company company = Company.getCompany();
+                company.addPlane(goldPlane);
                 //TODO add to GoldPlane List
 
             } else if (silverBtn.isSelected()) {
                 SilverPlane silverPlane = new SilverPlane(fuelCapacity, costKm, maxSpeed, engine, pass);
                 System.out.println("SILVER Plane has been created.");
                 System.out.println(silverPlane);
-
+                Company company = Company.getCompany();
+                company.addPlane(silverPlane);
                 //TODO add to SilverPlane List
 
             } else if (bronzeBtn.isSelected()) {
                 BronzePlane bronzePlane = new BronzePlane(fuelCapacity, costKm, maxSpeed, engine, pass);
                 System.out.println("BRONZE Plane has been created.");
                 System.out.println(bronzePlane);
+                Company company = Company.getCompany();
+                company.addPlane(bronzePlane);
 
                 //TODO add to BronzePlane List
             }

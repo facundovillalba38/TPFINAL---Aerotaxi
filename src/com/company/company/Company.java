@@ -80,6 +80,10 @@ public class Company {
         return selectedPlane;
     }
 
+    public List<Plane> getPlanes() {
+        return planes;
+    }
+
     //FLIGHTS
 
     public void addFlight(Flight f){
@@ -106,5 +110,7 @@ public class Company {
         return f;
     }
 
-
+    public List<Flight> getFlights() {
+        return flights;
+    }
 }

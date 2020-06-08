@@ -1,5 +1,8 @@
 package com.company.main;
 
+import com.company.main.FlightListWindow;
+import com.company.flight.Flight;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -78,9 +81,9 @@ public class MainWindow extends JFrame {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        JFrame showFlightWindow = new ShowFlightWindow();
+                        JFrame flightListWindow = new FlightListWindow();
                         WindowSetting windowSetting = new WindowSetting();
-                        windowSetting.windowSettings(showFlightWindow);
+                        windowSetting.windowSettings(flightListWindow);
                         dispose();
                     }
                 });
