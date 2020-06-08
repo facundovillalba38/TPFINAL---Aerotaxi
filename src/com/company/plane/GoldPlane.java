@@ -37,8 +37,16 @@ public class GoldPlane extends Plane {
         GoldPlane.fare = fare;
     }
 
+    private String getWifiString(){
+        if(getWifi() == true){
+            return "Sí";
+        } else {
+            return "No";
+        }
+    }
+
     @Override
     public String toString(){
-        return super.toString() + "\nTipo Gold - Catering: Sí - Wifi: Sí";
+        return super.toString() + "\nTipo Gold - Catering: Sí - Wifi: " + this.getWifiString();
     }
 }
