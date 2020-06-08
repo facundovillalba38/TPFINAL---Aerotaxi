@@ -11,11 +11,19 @@ public class Company {
     private List<User>users;
     private List<Plane>planes;
     private List<Flight>flights;
+    private static Company company;
 
-    public Company(){
+    private Company(){
         this.users = new ArrayList<>();
         this.planes = new ArrayList<>();
         this.flights = new ArrayList<>();
+    }
+
+    public static Company getCompany(){
+        if(company == null){
+            company = new Company();
+        }
+        return company;
     }
 
 
@@ -30,11 +38,13 @@ public class Company {
         users.remove(u);
     }
 
-    public void showUserList(){
+    public void showUsers(){
         for(User u : users){
             System.out.println(u);
         }
     }
+
+    public List<User> getUsers() { return users; }
 
     //PLANES
 

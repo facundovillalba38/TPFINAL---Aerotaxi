@@ -1,5 +1,6 @@
 package com.company.main;
 
+import com.company.company.Company;
 import com.company.user.User;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class UserWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 User user = new User();
+                //Company company = new Company();
 
                 String name = nameTxt.getText();
                 String surname = surnameTxt.getText();
@@ -32,7 +34,10 @@ public class UserWindow extends JFrame {
                 int age = Integer.parseInt(ageTxt.getText());
 
                 user.registerUserSwing(name, surname, dni, age);
-                System.out.println(user);
+                Company company = Company.getCompany();
+                company.addUser(user);
+                company.showUsers();
+
             }
         });
 

@@ -1,6 +1,10 @@
 package com.company.main;
 
+import com.company.company.Company;
+import com.company.user.User;
+
 import javax.swing.*;
+import java.util.List;
 
 public class UserListWindow extends JFrame {
     private JPanel userListPanel;
@@ -11,16 +15,18 @@ public class UserListWindow extends JFrame {
     public UserListWindow(){
         super("Lista de Usuarios Registrados");
 
-        String[]userList = {"Gonzalo Lascar - DNI: 35621123", "Facundo Villalba - DNI: 33333333", "Carla Gómez - DNI: 25654789"};
-
-        for(String i : userList){
-            listModel.addElement(i);
+        Company company = Company.getCompany();
+        List<User> users = company.getUsers();
+        for(User u : users){
+            listModel.addElement(u);
         }
 
         userJlist = new JList(listModel);
 
 
         setContentPane(userJlist);
+
+
 
     }
 }
