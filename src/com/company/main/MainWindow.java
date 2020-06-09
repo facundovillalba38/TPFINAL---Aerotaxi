@@ -65,7 +65,7 @@ public class MainWindow extends JFrame {
                     public void run() {
                         JFrame flightWindow = new FlightWindow();
                         WindowSetting windowSetting = new WindowSetting();
-                        //windowSetting.windowSettings(flightWindow);
+                        windowSetting.windowSettings(flightWindow);
                         dispose();
                     }
                 });

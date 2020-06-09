@@ -161,6 +161,17 @@ public class Flight {
         c.addFlight(this);
     }
 
+    public void bookFlightSwing(Company c, User u, LocalDate date, Destination origin, Destination destiny, int passengers, Plane plane){
+        this.setClient(u);
+        this.setDepartureDate(date);
+        this.setOriginDestination(origin);
+        this.setFinalDestination(destiny);
+        this.setPassengers(passengers);
+        this.setPlaneCategory(plane);
+        this.calculateTotalCost();
+        c.addFlight(this);
+    }
+
 
 }
 
