@@ -25,15 +25,13 @@ public class UserWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                User user = new User();
-                //Company company = new Company();
-
                 String name = nameTxt.getText();
                 String surname = surnameTxt.getText();
                 int dni = Integer.parseInt(dniTxt.getText());
                 int age = Integer.parseInt(ageTxt.getText());
 
-                user.registerUserSwing(name, surname, dni, age);
+                User user = new User(name, surname, dni, age);
+
                 Company company = Company.getCompany();
                 company.addUser(user);
                 company.showUsers();
