@@ -24,6 +24,7 @@ public class PlaneWindow extends JFrame {
     private JRadioButton noWifiBtn;
     private JButton registerPlaneBtn;
     private JButton planeListBtn;
+    private JButton backPageBtn;
 
 
     public PlaneWindow(){
@@ -85,6 +86,22 @@ public class PlaneWindow extends JFrame {
                     }
                 });
 
+            }
+        });
+
+
+        backPageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame mainWindow = new MainWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        windowSetting.windowSettings(mainWindow);
+                        dispose();
+                    }
+                });
             }
         });
     }

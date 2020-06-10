@@ -14,6 +14,7 @@ public class UserWindow extends JFrame {
     private JTextField surnameTxt;
     private JTextField dniTxt;
     private JTextField ageTxt;
+    private JButton backPageBtn;
 
     public UserWindow(){
         super("Registrar Usuario");
@@ -37,6 +38,21 @@ public class UserWindow extends JFrame {
                 company.addUser(user);
                 company.showUsers();
 
+            }
+        });
+
+        backPageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame mainWindow = new MainWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        windowSetting.windowSettings(mainWindow);
+                        dispose();
+                    }
+                });
             }
         });
 
