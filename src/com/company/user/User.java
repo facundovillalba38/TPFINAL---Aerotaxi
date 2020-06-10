@@ -92,7 +92,7 @@ public class User {
 
     @Override
     public String toString(){
-        return "Usuario: " + this.getName() + " " + this.getSurname() + " - DNI: " + this.getDni()
+        return this.getName() + " " + this.getSurname() + " - DNI: " + this.getDni()
                 + " - Edad: " + this.getAge();
     }
 }

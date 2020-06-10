@@ -3,10 +3,12 @@ package com.company.main;
 
 import com.company.company.Company;
 import com.company.flight.Flight;
+import com.company.user.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 
 public class FlightWindow extends JFrame {
@@ -64,9 +66,10 @@ public class FlightWindow extends JFrame {
         userLbl.setBounds(x1,60,100,height);
         flightPanel.add(userLbl);
 
-        String[]userList = {"---", "Gonzalo Lascar - DNI: 35621123", "Facundo Villalba - DNI: 35111111", "Carlos Pérez - DNI: 23669987"};
-        userBox = new JComboBox(userList);
-        userBox.setBounds(100,60,200,height);
+        //String[]userList = {"---", "Gonzalo Lascar - DNI: 35621123", "Facundo Villalba - DNI: 35111111", "Carlos Pérez - DNI: 23669987"};
+        List<User> userList = c.getUsers();
+        userBox = new JComboBox(userList.toArray());
+        userBox.setBounds(100,60,300,height);
         /*userBox.addItem("---");
         userBox.setSelectedItem("---");*/
         flightPanel.add(userBox);
