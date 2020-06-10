@@ -36,6 +36,7 @@ public class FlightWindow extends JFrame {
     private ButtonGroup destinationGroup;
     private JTextField userTxt = new JTextField();
     private JTextField planeTxt = new JTextField();
+    private JButton backPageBtn = new JButton();
 
     public FlightWindow() {
         super("Reserva de Vuelos");
@@ -73,8 +74,10 @@ public class FlightWindow extends JFrame {
         userBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userTxt.setText(userBox.getSelectedItem().toString());
-                System.out.println(userTxt.getText());
+                if(userBox.getSelectedIndex() != 0){
+                    userTxt.setText(userBox.getSelectedItem().toString());
+                    System.out.println(userTxt.getText());
+                }
             }
         });
 
@@ -154,8 +157,10 @@ public class FlightWindow extends JFrame {
         planeBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                planeTxt.setText(planeBox.getSelectedItem().toString());
-                System.out.println(planeTxt.getText());
+                if(planeBox.getSelectedIndex() != 0){
+                    planeTxt.setText(planeBox.getSelectedItem().toString());
+                    System.out.println(planeTxt.getText());
+                }
             }
         });
 
@@ -179,6 +184,27 @@ public class FlightWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //f.bookFlightSwing();
+            }
+        });
+
+        //BACK BUTTON
+
+        backPageBtn.setText("Volver");
+        backPageBtn.setBounds(x1, 380, 80, height);
+        flightPanel.add(backPageBtn);
+
+        backPageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JFrame mainWindow = new MainWindow();
+                        WindowSetting windowSetting = new WindowSetting();
+                        windowSetting.windowSettings(mainWindow);
+                        dispose();
+                    }
+                });
             }
         });
 
