@@ -70,8 +70,8 @@ public class FlightWindow extends JFrame {
         List<User> userList = c.getUsers();
         userBox = new JComboBox(userList.toArray());
         userBox.setBounds(100,60,300,height);
-        /*userBox.addItem("---");
-        userBox.setSelectedItem("---");*/
+        userBox.addItem("- Elija usuario -");
+        userBox.setSelectedItem("- Elija usuario -");
         flightPanel.add(userBox);
 
         userBox.addActionListener(new ActionListener() {
