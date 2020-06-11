@@ -154,11 +154,9 @@ public class PlaneWindow extends JFrame {
 
         } else {
             System.out.println("No se pudo crear avión.");
-        }
+}
 
     }
-
-
 
     private boolean validateWifi(){
         boolean wifi = yesWifiBtn.isSelected() ? true : false;

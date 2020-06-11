@@ -2,12 +2,16 @@ package com.company.main;
 
 
 import com.company.company.Company;
+import com.company.flight.Destination;
 import com.company.flight.Flight;
+import com.company.plane.Plane;
 import com.company.user.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -152,9 +156,15 @@ public class FlightWindow extends JFrame {
         planeLbl.setBounds(x1, 260, 75, height);
         flightPanel.add(planeLbl);
 
-        String []planeList = {"---", "Gold Plane - Capacidad: 7 - Catering: Sí - WiFi: Sí", "Bronze Plane - Capacidad: 10 - Catering: No - WiFi: No"};
-        planeBox = new JComboBox(planeList);
+        Company company = Company.getCompany();
+
+        List<Plane> planeList = c.getPlanes();
+        //String []planeList = {"---", "Gold Plane - Capacidad: 7 - Catering: Sí - WiFi: Sí", "Bronze Plane - Capacidad: 10 - Catering: No - WiFi: No"};
+        planeBox = new JComboBox(planeList.toArray());
         planeBox.setBounds(90, 260, 320, height);
+        planeBox.addItem("- Elija Avion -");
+        planeBox.setSelectedItem("- Elija Avion -");
+
         flightPanel.add(planeBox);
 
         planeBox.addActionListener(new ActionListener() {
@@ -166,6 +176,8 @@ public class FlightWindow extends JFrame {
                 }
             }
         });
+
+
 
         //SEVENTH ROW -- PRICE TXT
 
@@ -186,7 +198,8 @@ public class FlightWindow extends JFrame {
         bookBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //f.bookFlightSwing();
+                LocalDate date = new SimpleDateFormat("yyyy/MM/dd").parse(dateTxt.getText());
+                f.bookFlightSwing(c, (User) userBox.getSelectedItem(), LocalDate.parse(dateTxt.getText()), (Destination) originLbl.getText(), (Destination) destinyLbl.getText(), Integer.parseInt(companionTxt.getText()), (Plane) planeBox.getSelectedItem() );
             }
         });
 
@@ -281,4 +294,7 @@ public class FlightWindow extends JFrame {
     }
 
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
