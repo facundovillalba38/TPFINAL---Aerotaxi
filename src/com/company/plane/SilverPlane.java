@@ -27,7 +27,8 @@ public class SilverPlane extends Plane{
 
     @Override
     public String toString(){
-        return super.toString() + "\nTipo Silver - Catering: Sí - Wifi: No";
+        return "Silver - Catering: Sí - Wifi: No" +
+                " - Capacidad: " + super.getPassengerCapacity() + " personas";
     }
 }
 

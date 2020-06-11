@@ -17,6 +17,7 @@ public class BronzePlane extends Plane {
 
     @Override
     public String toString(){
-        return super.toString() + "\nTipo Bronze - Catering: No - Wifi: No";
+        return "Bronze - Catering: No - Wifi: No" +
+                " - Capacidad: " + super.getPassengerCapacity() + " personas";
     }
 }

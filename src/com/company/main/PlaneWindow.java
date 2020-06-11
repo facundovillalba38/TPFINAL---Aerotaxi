@@ -65,7 +65,7 @@ public class PlaneWindow extends JFrame {
 
                 } catch (CompleteAllFieldsException ex) {
                     System.out.println(ex.getMessage());
-                    JOptionPane.showMessageDialog(null, "No se pudo crear avión.","Error" ,JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "No se pudo crear avión.","Error" ,JOptionPane.ERROR_MESSAGE);
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }

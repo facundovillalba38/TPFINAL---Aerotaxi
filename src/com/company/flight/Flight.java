@@ -4,12 +4,12 @@ import com.company.company.Company;
 import com.company.plane.Plane;
 import com.company.user.User;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Flight {
+    private UUID id;
     private User client;
     private LocalDate departureDate;
     private Destination originDestination;
@@ -18,7 +18,13 @@ public class Flight {
     private Plane planeCategory;
     private double totalCost;
 
-    public Flight() {}
+    public Flight() {
+        this.id = UUID.randomUUID();
+    }
+
+    public UUID getID(){
+        return this.id;
+    }
 
     public User getClient() {
         return client;
@@ -60,9 +66,9 @@ public class Flight {
     }
 
     public void setPassengers(int passengers) {
-        if(this.getPlaneCategory().getPassengerCapacity()<passengers){
+        /*if(this.getPlaneCategory().getPassengerCapacity()<passengers){
             System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
-        }
+        }*/
         this.passengers = passengers;
     }
 
@@ -170,9 +176,20 @@ public class Flight {
         this.setPlaneCategory(plane);
         this.calculateTotalCost();
         c.addFlight(this);
+        System.out.println(this);
     }
 
-
+    @Override
+    public String toString() {
+        return "Vuelo: " + this.getID() +
+                "\nUsuario: " + this.getClient().getSurname() + " - DNI: " + this.getClient().getDni() +
+                "\nFecha: " + this.getDepartureDate() +
+                "\nSalida: " + this.getOriginDestination() +
+                "\nLlegada: " + this.getFinalDestination() +
+                "\nPasajeros: " + this.getPassengers() +
+                "\nAvión: " + this.getPlaneCategory() +
+                "\nPrecio final: " + this.getTotalCost();
+    }
 }
 
 

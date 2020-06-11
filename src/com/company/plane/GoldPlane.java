@@ -47,6 +47,7 @@ public class GoldPlane extends Plane {
 
     @Override
     public String toString(){
-        return super.toString() + "\nTipo Gold - Catering: Sí - Wifi: " + this.getWifiString();
+        return "Gold - Catering: Sí - Wifi: " + this.getWifiString() +
+                " - Capacidad: " + super.getPassengerCapacity() + " personas";
     }
 }
