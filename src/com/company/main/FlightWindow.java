@@ -202,7 +202,11 @@ public class FlightWindow extends JFrame {
                 int passengers = Integer.parseInt(companionTxt.getText());
                 passengers++;    //Companion plus de person who books the flight = total passengers!
 
+                //BOOK FLIGHT METHOD
                 f.bookFlightSwing(c, (User) userBox.getSelectedItem(),date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+
+                //Set Total Cost Label
+                totalCostLbl.setText("$ " + String.valueOf(f.getTotalCost()));
             }
         });
 
@@ -317,5 +321,5 @@ public class FlightWindow extends JFrame {
             }
         });
     }
-    
+
 }
