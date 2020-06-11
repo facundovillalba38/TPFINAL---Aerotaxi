@@ -81,7 +81,7 @@ public class PlaneWindow extends JFrame {
                         JFrame planeListWindow = new PlaneListWindow();
                         WindowSetting windowSetting = new WindowSetting();
                         windowSetting.windowSettings(planeListWindow);
-
+                        dispose();
                     }
                 });
 

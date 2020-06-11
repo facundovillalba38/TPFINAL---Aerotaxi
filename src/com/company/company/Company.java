@@ -70,10 +70,10 @@ public class Company {
         }
     }
 
-    public Plane getPlaneById(String planeId){
+    public Plane getPlaneById(int planeId){
         Plane selectedPlane = new Plane();
         for(Plane p : planes){
-            if(p.getId().equals(planeId)){
+            if(p.getId() == planeId){
                 selectedPlane = p;
             }
         }

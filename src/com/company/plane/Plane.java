@@ -3,7 +3,8 @@ package com.company.plane;
 import java.util.UUID;
 
 public class Plane {
-    private UUID id;
+    private int id;
+    private static int countId = 0;
     private double fuelCapacity;
     private double costKm;
     private double maxSpeed;
@@ -15,7 +16,7 @@ public class Plane {
     public Plane(){}
 
     public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare) {
-        this.id = UUID.randomUUID();
+        this.id = this.countId++;
         this.fuelCapacity = fuelCapacity;
         this.costKm = costKm;
         this.maxSpeed = maxSpeed;
@@ -25,7 +26,7 @@ public class Plane {
         this.busy = false;
     }
 
-    public UUID getId(){
+    public int getId(){
         return id;
     }
 

@@ -182,7 +182,7 @@ public class FlightWindow extends JFrame {
         flightPanel.add(priceLbl);
 
         totalCostLbl.setText("$ "+"0");
-        totalCostLbl.setBounds(100, 300, 50, height);
+        totalCostLbl.setBounds(100, 300, 100, height);
         flightPanel.add(totalCostLbl);
 
         // EIGHTH ROW -- BOOK BUTTON

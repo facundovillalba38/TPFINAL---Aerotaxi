@@ -6,10 +6,10 @@ import com.company.user.User;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Flight {
-    private UUID id;
+    private int id;
+    private static int countId = 0;
     private User client;
     private LocalDate departureDate;
     private Destination originDestination;
@@ -19,10 +19,10 @@ public class Flight {
     private double totalCost;
 
     public Flight() {
-        this.id = UUID.randomUUID();
+        this.id = this.countId++;
     }
 
-    public UUID getID(){
+    public int getID(){
         return this.id;
     }
 
@@ -138,7 +138,7 @@ public class Flight {
         c.showPlaneList();
 
         System.out.println("Ingrese ID del avión:");
-        String planeId = scanner.next();
+        int planeId = scanner.nextInt();
         this.setPlaneCategory(c.getPlaneById(planeId));
 
         /*System.out.println("Ingrese la cantidad de acompañantes:");
