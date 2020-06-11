@@ -173,6 +173,8 @@ public class FlightWindow extends JFrame {
             }
         });
 
+
+
         //SEVENTH ROW -- PRICE TXT
 
         priceLbl.setText("Precio:");
@@ -315,6 +317,5 @@ public class FlightWindow extends JFrame {
             }
         });
     }
-
-
+    
 }
