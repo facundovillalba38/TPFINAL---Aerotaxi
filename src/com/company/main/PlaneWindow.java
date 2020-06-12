@@ -17,7 +17,6 @@ public class PlaneWindow extends JFrame {
     private JRadioButton silverBtn;
     private JTextField fuelTxt;
     private JTextField speedTxt;
-    private JTextField engineTxt;
     private JTextField passengersTxt;
     private ButtonGroup wifiGroup;
     private JRadioButton yesWifiBtn;
@@ -25,6 +24,10 @@ public class PlaneWindow extends JFrame {
     private JButton registerPlaneBtn;
     private JButton planeListBtn;
     private JButton backPageBtn;
+    private ButtonGroup engineGroup;
+    private JRadioButton reactionEngineBtn;
+    private JRadioButton propellerEngineBtn;
+    private JRadioButton pistonsEngineBtn;
 
 
     public PlaneWindow(){
@@ -41,6 +44,10 @@ public class PlaneWindow extends JFrame {
         wifiGroup.add(yesWifiBtn);
         wifiGroup.add(noWifiBtn);
 
+        engineGroup = new ButtonGroup();
+        engineGroup.add(reactionEngineBtn);
+        engineGroup.add(propellerEngineBtn);
+        engineGroup.add(pistonsEngineBtn);
 
 
         registerPlaneBtn.addActionListener(new ActionListener() {
@@ -51,22 +58,26 @@ public class PlaneWindow extends JFrame {
                 String fuelCapacitiy = fuelTxt.getText();
                 double costKm = 300;
                 String maxSpeed = speedTxt.getText();
-                String engineType = engineTxt.getText();
                 String passengers = passengersTxt.getText();
                 boolean wifi = validateWifi();
+                String engineType = engineSelection();
 
                 try {
-                    if(fuelTxt.getText().isEmpty() || engineTxt.getText().isEmpty() || speedTxt.getText().isEmpty() || passengersTxt.getText().isEmpty() || !yesWifiBtn.isSelected() || !noWifiBtn.isSelected()){
+                    if(fuelTxt.getText().isEmpty() || engineType.isEmpty() || speedTxt.getText().isEmpty() || passengersTxt.getText().isEmpty() || !yesWifiBtn.isSelected() || !noWifiBtn.isSelected()){
 
                         //Method to generate a new plane instance
                         createPlane(fuelCapacitiy, costKm, maxSpeed, engineType, passengers, wifi);
 
-                    } throw new CompleteAllFieldsException(goldBtn, silverBtn, bronzeBtn, fuelTxt, speedTxt, engineTxt, passengersTxt, yesWifiBtn, noWifiBtn);
+                    } throw new CompleteAllFieldsException(goldBtn, silverBtn, bronzeBtn, fuelTxt, speedTxt, engineType, passengersTxt, yesWifiBtn, noWifiBtn);
 
                 } catch (CompleteAllFieldsException ex) {
                     System.out.println(ex.getMessage());
-                    JOptionPane.showMessageDialog(null, ex.getMessage(),"Error" ,JOptionPane.ERROR_MESSAGE);
-                    //JOptionPane.showMessageDialog(null, ex.getMessage());
+                    if(ex.getMessage().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "El avión se registró exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage(),"Error" ,JOptionPane.ERROR_MESSAGE);
+                    }
+
                 }
             }
         });
@@ -124,6 +135,10 @@ public class PlaneWindow extends JFrame {
             maxSpeed = 0;
         }
 
+        if(engine.isEmpty()){
+            error = true;
+        }
+
         if(!error) {
 
             if (goldBtn.isSelected()) {
@@ -132,7 +147,7 @@ public class PlaneWindow extends JFrame {
                 System.out.println(goldPlane);
                 Company company = Company.getCompany();
                 company.addPlane(goldPlane);
-                //TODO add to GoldPlane List
+
 
             } else if (silverBtn.isSelected()) {
                 SilverPlane silverPlane = new SilverPlane(fuelCapacity, costKm, maxSpeed, engine, pass);
@@ -140,7 +155,7 @@ public class PlaneWindow extends JFrame {
                 System.out.println(silverPlane);
                 Company company = Company.getCompany();
                 company.addPlane(silverPlane);
-                //TODO add to SilverPlane List
+
 
             } else if (bronzeBtn.isSelected()) {
                 BronzePlane bronzePlane = new BronzePlane(fuelCapacity, costKm, maxSpeed, engine, pass);
@@ -149,7 +164,6 @@ public class PlaneWindow extends JFrame {
                 Company company = Company.getCompany();
                 company.addPlane(bronzePlane);
 
-                //TODO add to BronzePlane List
             }
 
         } else {
@@ -161,5 +175,19 @@ public class PlaneWindow extends JFrame {
     private boolean validateWifi(){
         boolean wifi = yesWifiBtn.isSelected() ? true : false;
         return wifi;
+    }
+
+    private String engineSelection(){
+        String engine = "";
+        if(reactionEngineBtn.isSelected()){
+            engine = "Reacción";
+        }
+        if(propellerEngineBtn.isSelected()){
+            engine = "Hélice";
+        }
+        if(pistonsEngineBtn.isSelected()){
+            engine = "Pistones";
+        }
+        return engine;
     }
 }

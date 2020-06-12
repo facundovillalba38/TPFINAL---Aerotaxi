@@ -9,12 +9,12 @@ public class CompleteAllFieldsException extends Exception {
     private JRadioButton silverBtn;
     private JTextField fuelTxt;
     private JTextField speedTxt;
-    private JTextField engineTxt;
+    private String engineTxt;
     private JTextField passengersTxt;
     private JRadioButton yesWifiBtn;
     private JRadioButton noWifiBtn;
 
-    public CompleteAllFieldsException(JRadioButton goldBtn, JRadioButton bronzeBtn, JRadioButton silverBtn, JTextField fuelTxt, JTextField speedTxt, JTextField engineTxt, JTextField passengersTxt, JRadioButton yesWifiBtn, JRadioButton noWifiBtn) {
+    public CompleteAllFieldsException(JRadioButton goldBtn, JRadioButton bronzeBtn, JRadioButton silverBtn, JTextField fuelTxt, JTextField speedTxt, String engineTxt, JTextField passengersTxt, JRadioButton yesWifiBtn, JRadioButton noWifiBtn) {
         this.goldBtn = goldBtn;
         this.bronzeBtn = bronzeBtn;
         this.silverBtn = silverBtn;
@@ -56,7 +56,7 @@ public class CompleteAllFieldsException extends Exception {
         return speedTxt;
     }
 
-    public JTextField getEngineTxt() {
+    public String getEngineTxt() {
         return engineTxt;
     }
 
@@ -100,7 +100,7 @@ public class CompleteAllFieldsException extends Exception {
             message += "Error! Debes completar la casilla de velocidad.\n";
         }
 
-        if(getEngineTxt().getText().isEmpty()){
+        if(getEngineTxt().isEmpty()){
             message += "Error! Debes completar la casilla de motor.\n";
         }
 
