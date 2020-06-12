@@ -203,7 +203,15 @@ public class FlightWindow extends JFrame {
                 passengers++;    //Companion plus de person who books the flight = total passengers!
 
                 //BOOK FLIGHT METHOD
-                f.bookFlightSwing(c, (User) userBox.getSelectedItem(),date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+
+                Plane planeSelected = (Plane) planeBox.getSelectedItem();
+                int planeSelectedOccupation = planeSelected.getPassengerCapacity();
+
+                if(passengers <= planeSelectedOccupation){
+                    f.bookFlightSwing(c, (User) userBox.getSelectedItem(),date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                } else {
+                    JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
                 //Set Total Cost Label
                 totalCostLbl.setText("$ " + String.valueOf(f.getTotalCost()));

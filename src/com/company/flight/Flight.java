@@ -66,9 +66,6 @@ public class Flight {
     }
 
     public void setPassengers(int passengers) {
-        /*if(this.getPlaneCategory().getPassengerCapacity()<passengers){
-            System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
-        }*/
         this.passengers = passengers;
     }
 
