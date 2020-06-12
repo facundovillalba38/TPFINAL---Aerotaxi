@@ -26,10 +26,6 @@ public class CompleteAllFieldsException extends Exception {
         this.noWifiBtn = noWifiBtn;
     }
 
-
-
-
-
     public JRadioButton getGoldBtn() {
         return goldBtn;
     }
