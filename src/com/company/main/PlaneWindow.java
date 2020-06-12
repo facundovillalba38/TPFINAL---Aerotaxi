@@ -62,22 +62,30 @@ public class PlaneWindow extends JFrame {
                 boolean wifi = validateWifi();
                 String engineType = engineSelection();
 
-                try {
-                    if(fuelTxt.getText().isEmpty() || engineType.isEmpty() || speedTxt.getText().isEmpty() || passengersTxt.getText().isEmpty() || !yesWifiBtn.isSelected() || !noWifiBtn.isSelected()){
+                if(!onlyNumberInput(fuelCapacitiy) || !onlyNumberInput(maxSpeed) || !onlyNumberInput(passengers)){
 
-                        //Method to generate a new plane instance
-                        createPlane(fuelCapacitiy, costKm, maxSpeed, engineType, passengers, wifi);
+                    JOptionPane.showMessageDialog(null, "Sólo se admiten valores numéricos.", "Advertencia", JOptionPane.ERROR_MESSAGE);
 
-                    } throw new CompleteAllFieldsException(goldBtn, silverBtn, bronzeBtn, fuelTxt, speedTxt, engineType, passengersTxt, yesWifiBtn, noWifiBtn);
+                } else {
 
-                } catch (CompleteAllFieldsException ex) {
-                    System.out.println(ex.getMessage());
-                    if(ex.getMessage().isEmpty()){
-                        JOptionPane.showMessageDialog(null, "El avión se registró exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, ex.getMessage(),"Error" ,JOptionPane.ERROR_MESSAGE);
+                    try {
+                        if (fuelTxt.getText().isEmpty() || engineType.isEmpty() || speedTxt.getText().isEmpty() || passengersTxt.getText().isEmpty() || !yesWifiBtn.isSelected() || !noWifiBtn.isSelected()) {
+
+                            //Method to generate a new plane instance
+                            createPlane(fuelCapacitiy, costKm, maxSpeed, engineType, passengers, wifi);
+
+                        }
+                        throw new CompleteAllFieldsException(goldBtn, silverBtn, bronzeBtn, fuelTxt, speedTxt, engineType, passengersTxt, yesWifiBtn, noWifiBtn);
+
+                    } catch (CompleteAllFieldsException ex) {
+                        System.out.println(ex.getMessage());
+                        if (ex.getMessage().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "El avión se registró exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
-
                 }
             }
         });
@@ -189,5 +197,16 @@ public class PlaneWindow extends JFrame {
             engine = "Pistones";
         }
         return engine;
+    }
+
+
+    private boolean onlyNumberInput(String string){
+
+        for(char c : string.toCharArray()){
+            if(!Character.isDigit(c)){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -224,7 +224,11 @@ public class FlightWindow extends JFrame {
 
                     //Occupation verification
                     if (passengers <= planeSelectedOccupation) {
+
                         f.bookFlightSwing(c, (User) userBox.getSelectedItem(), date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+
+                        JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

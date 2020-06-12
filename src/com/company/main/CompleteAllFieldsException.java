@@ -85,27 +85,27 @@ public class CompleteAllFieldsException extends Exception {
         String message = "";
 
         if(validatePlaneBtn() == false){
-            message += "Error! Debes elegir un avión.\n";
+            message += "Debes elegir un avión.\n";
         }
 
         if(validateWifiBtn() == false){
-            message += "Error! Debes seleccionar wifi.\n";
+            message += "Debes seleccionar wifi.\n";
         }
 
         if(getFuelTxt().getText().isEmpty()){
-            message += "Error! Debes completar la casilla de combustible.\n";
+            message += "Debes completar la casilla de combustible.\n";
         }
 
         if(getSpeedTxt().getText().isEmpty()){
-            message += "Error! Debes completar la casilla de velocidad.\n";
+            message += "Debes completar la casilla de velocidad.\n";
         }
 
         if(getEngineTxt().isEmpty()){
-            message += "Error! Debes completar la casilla de motor.\n";
+            message += "Debes completar la casilla de motor.\n";
         }
 
         if(getPassengersTxt().getText().isEmpty()){
-            message += "Error! Debes completar la casilla de pasajeros.\n";
+            message += "Debes completar la casilla de pasajeros.\n";
         }
 
         return message;
