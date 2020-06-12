@@ -85,11 +85,6 @@ public class User {
         f.bookFlight(c, this);
     }
 
-    public void cancelFlight(){
-
-        //TODO cancell flight
-    }
-
     @Override
     public String toString(){
         return this.getName() + " " + this.getSurname() + " - DNI: " + this.getDni()

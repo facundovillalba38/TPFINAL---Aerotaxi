@@ -73,16 +73,19 @@ public class FlightWindow extends JFrame {
         List<User> userList = c.getUsers();
         userBox = new JComboBox(userList.toArray());
         userBox.setBounds(100,60,300,height);
-        userBox.addItem("- Elija usuario -");
-        userBox.setSelectedItem("- Elija usuario -");
+        String userItem = "- Elija usuario -";
+        userBox.addItem(userItem);
+        userBox.setSelectedItem(userItem);
         flightPanel.add(userBox);
 
         userBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(userBox.getSelectedIndex() != 0){
+                if(!userBox.getSelectedItem().equals(userItem)){
                     userTxt.setText(userBox.getSelectedItem().toString());
                     System.out.println(userTxt.getText());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe elegir un usuario!", "Atención", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -159,16 +162,19 @@ public class FlightWindow extends JFrame {
         List<Plane>planeList = c.getPlanes();
         planeBox = new JComboBox(planeList.toArray());
         planeBox.setBounds(90, 260, 320, height);
-        planeBox.addItem("- Elija avión -");
-        planeBox.setSelectedItem("- Elija avión -");
+        String planeItem = "- Elija avión -";
+        planeBox.addItem(planeItem);
+        planeBox.setSelectedItem(planeItem);
         flightPanel.add(planeBox);
 
         planeBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(planeBox.getSelectedIndex() != 0){
+                if(!planeBox.getSelectedItem().equals(planeItem)){
                     planeTxt.setText(planeBox.getSelectedItem().toString());
                     System.out.println(planeTxt.getText());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe elegir un avión!", "Atención", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -195,26 +201,37 @@ public class FlightWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //Get actual date (yyyy-mm-dd)
-                LocalDate date = LocalDate.now();
+                //Verification of combo boxes with if sentence
 
-                //Get passengers
-                int passengers = Integer.parseInt(companionTxt.getText());
-                passengers++;    //Companion plus de person who books the flight = total passengers!
+                if (userBox.getSelectedItem().equals(userItem) || planeBox.getSelectedItem().equals(planeItem)) {
 
-                //BOOK FLIGHT METHOD
+                    JOptionPane.showMessageDialog(null, "Verifique el usuario o el avión.", "Atención", JOptionPane.ERROR_MESSAGE);
 
-                Plane planeSelected = (Plane) planeBox.getSelectedItem();
-                int planeSelectedOccupation = planeSelected.getPassengerCapacity();
-
-                if(passengers <= planeSelectedOccupation){
-                    f.bookFlightSwing(c, (User) userBox.getSelectedItem(),date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
                 } else {
-                    JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
 
-                //Set Total Cost Label
-                totalCostLbl.setText("$ " + String.valueOf(f.getTotalCost()));
+                    //Get actual date (yyyy-mm-dd)
+                    LocalDate date = LocalDate.now();
+
+                    //Get passengers
+                    int passengers = Integer.parseInt(companionTxt.getText());
+                    passengers++;    //Companion plus de person who books the flight = total passengers!
+
+
+                    //BOOK FLIGHT METHOD
+
+                    Plane planeSelected = (Plane) planeBox.getSelectedItem();
+                    int planeSelectedOccupation = planeSelected.getPassengerCapacity();
+
+                    //Occupation verification
+                    if (passengers <= planeSelectedOccupation) {
+                        f.bookFlightSwing(c, (User) userBox.getSelectedItem(), date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    //Set Total Cost Label
+                    totalCostLbl.setText("$ " + String.valueOf(f.getTotalCost()));
+                }
             }
         });
 
