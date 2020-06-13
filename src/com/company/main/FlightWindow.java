@@ -10,6 +10,7 @@ import com.company.user.User;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -212,6 +213,9 @@ public class FlightWindow extends JFrame {
                     //Get actual date (yyyy-mm-dd)
                     LocalDate date = LocalDate.now();
 
+                    LocalDate dateFlight = LocalDate.parse(dateTxt.getText());
+                    Boolean exist = false;
+
                     //Get passengers
                     int passengers = Integer.parseInt(companionTxt.getText());
                     passengers++;    //Companion plus de person who books the flight = total passengers!
@@ -221,13 +225,37 @@ public class FlightWindow extends JFrame {
 
                     Plane planeSelected = (Plane) planeBox.getSelectedItem();
                     int planeSelectedOccupation = planeSelected.getPassengerCapacity();
+                    Company company = Company.getCompany();
+                    List<Flight> flights = company.getFlights();
 
                     //Occupation verification
                     if (passengers <= planeSelectedOccupation) {
+                        if(!flights.isEmpty()){
+                            for(Flight f : flights){
+                                if(f.getDepartureDate().equals(dateFlight)){
+                                    exist = true;
 
-                        f.bookFlightSwing(c, (User) userBox.getSelectedItem(), date, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                }
+                            }
+                            if(exist){
+                                JOptionPane.showMessageDialog(null, "Ya hay un vuelo resevado para la fecha ingresada.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }else if(getSelectedOriginCity() == getSelectedDestinyCity()){
+                                JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
-                        JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            }else{  // if the origin != destination
+                                f.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                        else if(getSelectedOriginCity() == getSelectedDestinyCity()){
+                            JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                        }else{  // if the origin != destination
+                            f.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                            JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+
 
                     } else {
                         JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
