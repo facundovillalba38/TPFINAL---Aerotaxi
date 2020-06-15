@@ -1,0 +1,1 @@
+{"id":0,"client":{"name":"facundo","surname":"villalba","dni":202020,"age":20},"departureDate":null,"originDestination":"BUENOSAIRES","finalDestination":"CORDOBA","passengers":20,"planeCategory":{"id":0,"fuelCapacity":10.0,"costKm":10.0,"maxSpeed":10.0,"engineType":"hgoas","passengerCapacity":10,"planeFare":10.0,"busy":false},"totalCost":0.0}
