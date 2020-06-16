@@ -4,14 +4,17 @@ import com.company.flight.Destination;
 import com.company.flight.Flight;
 import com.company.plane.Plane;
 import com.company.user.User;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.*;
 
 public class PersistData {
-    private String path = "C:\\Users\\faaaa\\Desktop\\Facu\\Programacion - UTN\\SEGUNDO AÑO\\PRIMER CUATRI\\Programacion y Laboratorio III\\Práctico\\TP2 - Aerotaxi\\archivos";
+    //private String path = "C:\\Users\\faaaa\\Desktop\\Facu\\Programacion - UTN\\SEGUNDO AÑO\\PRIMER CUATRI\\Programacion y Laboratorio III\\Práctico\\TP2 - Aerotaxi\\archivos";
+    private String path = "archivos";
 
     public PersistData() {}
 
@@ -19,8 +22,10 @@ public class PersistData {
         return path;
     }
 
-    public void User2Json(User user, String file){
+    public void User2Json(List<User> users, String file){
         File f = new File(this.path + "\\"+file);
+        System.out.println(f.getPath());
+        System.out.println(f.getAbsolutePath());
         ObjectMapper mapper = new ObjectMapper();
         try{
             if(!f.exists()){
@@ -28,7 +33,7 @@ public class PersistData {
                 f.createNewFile();
                 System.out.println("Archivo "+f.getName()+" creado");
             }
-            mapper.writeValue(f, user);
+            mapper.writeValue(f, users);
 
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -36,20 +41,23 @@ public class PersistData {
         }
     }
 
-    public void Json2User(String file){
+    public List<User> Json2User(String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        List<User> users = new ArrayList<>();
         try{
             if(!f.exists()){
                 System.out.println("El archivo que quiere leer no existe");
             }else{
-                User user = mapper.readValue(f, User.class);
-                System.out.println("JACKSON: "+user.toString());
+                users = mapper.readValue(f, ArrayList.class);
+                System.out.println("JACKSON: "+users.toString());
             }
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        return users;
     }
 
     public void Plane2Json(Plane plane, String file){
@@ -119,7 +127,7 @@ public class PersistData {
     }
 
 
-    public static void main (String args[]){
+    /*public static void main (String args[]){
         PersistData persistData = new PersistData();
         File f = new File(persistData.getPath());
 
@@ -153,7 +161,7 @@ public class PersistData {
 
 
 
-    }
+    }*/
 
 
 

@@ -1,8 +1,10 @@
 package com.company.company;
 
+import com.company.data.PersistData;
 import com.company.flight.Flight;
 import com.company.plane.Plane;
 import com.company.user.User;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,10 @@ public class Company {
 
     public void addUser(User u){
         users.add(u);
+
+        //Persist user information
+        PersistData persistData = new PersistData();
+        persistData.User2Json(users, "user.json");
     }
 
     public void deleteUser(User u){
@@ -44,7 +50,16 @@ public class Company {
         }
     }
 
-    public List<User> getUsers() { return users; }
+    public List<User> getUsers() {
+        List<User>usersFromFile = new ArrayList<User>();
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        usersFromFile = persistData.Json2User("user.json");
+        return usersFromFile;
+    }
+
+
+
 
     //PLANES
 
@@ -83,6 +98,9 @@ public class Company {
     public List<Plane> getPlanes() {
         return planes;
     }
+
+
+
 
     //FLIGHTS
 
