@@ -24,8 +24,6 @@ public class PersistData {
 
     public void User2Json(List<User> users, String file){
         File f = new File(this.path + "\\"+file);
-        System.out.println(f.getPath());
-        System.out.println(f.getAbsolutePath());
         ObjectMapper mapper = new ObjectMapper();
         try{
             if(!f.exists()){
@@ -60,7 +58,7 @@ public class PersistData {
         return users;
     }
 
-    public void Plane2Json(Plane plane, String file){
+    public void Plane2Json(List<Plane>planes, String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
         try{
@@ -69,7 +67,7 @@ public class PersistData {
                 f.createNewFile();
                 System.out.println("Archivo "+f.getName()+" creado");
             }
-            mapper.writeValue(f, plane);
+            mapper.writeValue(f, planes);
 
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -77,20 +75,23 @@ public class PersistData {
         }
     }
 
-    public void Json2Plane(String file){
+    public List<Plane> Json2Plane(String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        List<Plane>planes = new ArrayList<>();
         try{
             if(!f.exists()){
                 System.out.println("El archivo que quiere leer no existe");
             }else{
-                Plane plane = mapper.readValue(f, Plane.class);
-                System.out.println("JACKSON: "+plane.toString());
+                planes = mapper.readValue(f, ArrayList.class);
+                System.out.println("JACKSON: "+planes.toString());
             }
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        return planes;
     }
 
     public void Flight2Json(Flight flight, String file){

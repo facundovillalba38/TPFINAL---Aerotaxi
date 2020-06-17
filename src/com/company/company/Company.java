@@ -65,6 +65,10 @@ public class Company {
 
     public void addPlane(Plane p){
         planes.add(p);
+
+        //Persist user information
+        PersistData persistData = new PersistData();
+        persistData.Plane2Json(planes, "plane.json");
     }
 
     public void deletePlane(Plane p){
@@ -96,7 +100,12 @@ public class Company {
     }
 
     public List<Plane> getPlanes() {
-        return planes;
+        List<Plane>planesFromFile = new ArrayList<>();
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        planesFromFile = persistData.Json2Plane("plane.json");
+        return planesFromFile;
+
     }
 
 

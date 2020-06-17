@@ -1,10 +1,1 @@
-{
-  "id":0,
-  "fuelCapacity":10.0,
-  "costKm":10.0,
-  "maxSpeed":10.0,
-  "engineType":"hgoas",
-  "passengerCapacity":10,
-  "planeFare":10.0,
-  "busy":false
-}
+[{"id":0,"fuelCapacity":1000.0,"costKm":300.0,"maxSpeed":700.0,"engineType":"Reacción","passengerCapacity":10,"planeFare":6000.0,"busy":false,"catering":true,"wifi":true}]
