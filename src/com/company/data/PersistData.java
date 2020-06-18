@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -44,11 +45,14 @@ public class PersistData {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         List<User> users = new ArrayList<>();
+        //User user = new User();
         try{
             if(!f.exists()){
                 System.out.println("El archivo que quiere leer no existe");
             }else{
-                users = mapper.readValue(f, ArrayList.class);
+
+                users = mapper.readValue(f, new TypeReference<List<User>>(){});
+
                 System.out.println("JACKSON: "+users.toString());
             }
         }catch(IOException e) {
@@ -84,7 +88,7 @@ public class PersistData {
             if(!f.exists()){
                 System.out.println("El archivo que quiere leer no existe");
             }else{
-                planes = mapper.readValue(f, ArrayList.class);
+                planes = mapper.readValue(f, new TypeReference<List<Plane>>(){});
                 System.out.println("JACKSON: "+planes.toString());
             }
         }catch(IOException e) {
@@ -94,16 +98,17 @@ public class PersistData {
         return planes;
     }
 
-    public void Flight2Json(Flight flight, String file){
+    public void Flight2Json(List<Flight> flights, String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+
         try{
             if(!f.exists()){
                 System.out.println("Creando Archivo...");
                 f.createNewFile();
                 System.out.println("Archivo "+f.getName()+" creado");
             }
-            mapper.writeValue(f, flight);
+            mapper.writeValue(f, flights);
 
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());
@@ -114,12 +119,14 @@ public class PersistData {
     public void Json2Flight(String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        List<Flight> flights = new ArrayList<>();
         try{
             if(!f.exists()){
                 System.out.println("El archivo que quiere leer no existe");
             }else{
-                Flight flight = mapper.readValue(f, Flight.class);
-                System.out.println("JACKSON: "+flight.toString());
+                flights = mapper.readValue(f, new TypeReference<List<Flight>>(){});
+                System.out.println("JACKSON: "+flights.toString());
             }
         }catch(IOException e) {
             System.out.println("Error: " + e.getMessage());

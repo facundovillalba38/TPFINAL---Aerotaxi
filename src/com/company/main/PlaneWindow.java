@@ -158,7 +158,7 @@ public class PlaneWindow extends JFrame {
 
 
             } else if (silverBtn.isSelected()) {
-                SilverPlane silverPlane = new SilverPlane(fuelCapacity, costKm, maxSpeed, engine, pass);
+                SilverPlane silverPlane = new SilverPlane(fuelCapacity, costKm, maxSpeed, engine, pass, false);
                 System.out.println("SILVER Plane has been created.");
                 System.out.println(silverPlane);
                 Company company = Company.getCompany();

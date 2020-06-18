@@ -115,6 +115,9 @@ public class Company {
 
     public void addFlight(Flight f){
         flights.add(f);
+
+        PersistData persistData = new PersistData();
+        persistData.Flight2Json(flights, "flight.json");
     }
 
     public void deleteFlight(Flight f){
