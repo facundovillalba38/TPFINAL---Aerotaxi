@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="40" bottom="10" right="40"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="1076" height="684"/>
     </constraints>
     <properties>
       <enabled value="true"/>
@@ -12,7 +12,7 @@
     <children>
       <component id="5f724" class="javax.swing.JButton" binding="goUserBtn">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Registrar Usuario"/>
@@ -20,7 +20,7 @@
       </component>
       <component id="3062b" class="javax.swing.JButton" binding="goPlaneBtn">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Registrar Flota"/>
@@ -28,7 +28,7 @@
       </component>
       <component id="f2fb3" class="javax.swing.JButton" binding="goFlightBtn">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Registrar Vuelo"/>
@@ -36,7 +36,7 @@
       </component>
       <component id="f1687" class="javax.swing.JButton" binding="showFlightBtn">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Mostrar Vuelos"/>
