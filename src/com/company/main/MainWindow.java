@@ -8,19 +8,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
-    private JPanel mainWindow;
-    private JButton goUserBtn;
-    private JButton goPlaneBtn;
-    private JButton goFlightBtn;
-    private JButton showFlightBtn;
-
+    private JPanel mainWindow = new JPanel();
+    private JButton goUserBtn = new JButton();
+    private JButton goPlaneBtn = new JButton();
+    private JButton goFlightBtn = new JButton();
+    private JButton showFlightBtn = new JButton();
+    private JLabel imageLbl = new JLabel();
 
     public MainWindow(){
         super("Empresa de Aerotaxi");
 
+        mainWindow.setLayout(null);
         setContentPane(mainWindow);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        imageLbl.setIcon(new ImageIcon("src/img/avion.jpg"));
+        imageLbl.setBounds(0, -20, 500, 500);
+        mainWindow.add(imageLbl, 0);
+
+        goUserBtn.setText("Registro de Usuario");
+        goUserBtn.setBounds(20, 20, 200, 25);
+        mainWindow.add(goUserBtn, 0);
 
         goUserBtn.addActionListener(new ActionListener() {
             @Override
@@ -39,6 +48,10 @@ public class MainWindow extends JFrame {
         });
 
 
+        goPlaneBtn.setText("Registro de Flota");
+        goPlaneBtn.setBounds(20, 60, 200, 25);
+        mainWindow.add(goPlaneBtn, 1);
+
         goPlaneBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +68,10 @@ public class MainWindow extends JFrame {
             }
         });
 
+
+        goFlightBtn.setText("Registro de Vuelos");
+        goFlightBtn.setBounds(20, 100, 200, 25);
+        mainWindow.add(goFlightBtn, 2);
 
         goFlightBtn.addActionListener(new ActionListener() {
             @Override
@@ -73,6 +90,9 @@ public class MainWindow extends JFrame {
         });
 
 
+        showFlightBtn.setText("Mostrar Vuelos");
+        showFlightBtn.setBounds(20, 140, 200, 25);
+        mainWindow.add(showFlightBtn, 3);
 
         showFlightBtn.addActionListener(new ActionListener() {
 
