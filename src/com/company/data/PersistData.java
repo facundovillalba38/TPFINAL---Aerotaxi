@@ -1,5 +1,6 @@
 package com.company.data;
 
+import com.company.company.Company;
 import com.company.flight.Destination;
 import com.company.flight.Flight;
 import com.company.plane.Plane;
@@ -7,6 +8,8 @@ import com.company.user.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -101,6 +104,8 @@ public class PersistData {
     public void Flight2Json(List<Flight> flights, String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         try{
             if(!f.exists()){
@@ -116,9 +121,11 @@ public class PersistData {
         }
     }
 
-    public void Json2Flight(String file){
+    public List<Flight> Json2Flight(String file){
         File f = new File(this.path + "\\"+file);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         List<Flight> flights = new ArrayList<>();
         try{
@@ -132,44 +139,29 @@ public class PersistData {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        return flights;
     }
 
 
-    /*public static void main (String args[]){
-        PersistData persistData = new PersistData();
-        File f = new File(persistData.getPath());
+    public void removeJsonFlight(String file, List<Flight>flightList){
+        File f = new File(this.path + "\\"+file);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
+        try{
+            if(!f.exists()){
+                System.out.println("El archivo que quiere leer no existe");
+            }else{
+                mapper.writeValue(f, flightList);
+            }
+        }catch(IOException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
 
-
-
-            User user = new User("facundo", "villalba", 202020, 20);
-
-            Plane plane = new Plane(10, 10, 10, "hgoas", 10, 10);
-
-            Flight flight = new Flight();
-            flight.setClient(user);
-            //LocalDate date = new Date(LocalDate.now());
-            //flight.setDepartureDate();
-            flight.setOriginDestination(Destination.BUENOSAIRES);
-            flight.setFinalDestination(Destination.CORDOBA);
-            flight.setPassengers(20);
-            flight.setPlaneCategory(plane);
-
-
-
-            //persistData.User2Json(user, "user.json");
-            //persistData.Json2User("user.json");
-            //persistData.Plane2Json(plane, "plane.json");
-            //persistData.Json2Plane("plane.json");
-            persistData.Flight2Json(flight, "flight.json");
-            persistData.Json2Flight("flight.json");
-
-
-
-
-
-
-    }*/
+    }
 
 
 

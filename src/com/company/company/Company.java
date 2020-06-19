@@ -55,6 +55,7 @@ public class Company {
         //Get persisted user information
         PersistData persistData = new PersistData();
         usersFromFile = persistData.Json2User("user.json");
+        this.users = usersFromFile;
         return usersFromFile;
     }
 
@@ -104,6 +105,7 @@ public class Company {
         //Get persisted user information
         PersistData persistData = new PersistData();
         planesFromFile = persistData.Json2Plane("plane.json");
+        this.planes = planesFromFile;
         return planesFromFile;
 
     }
@@ -121,7 +123,12 @@ public class Company {
     }
 
     public void deleteFlight(Flight f){
-        flights.remove(f);
+        //Remove it from list
+        this.flights.remove(getFlightById(f.getID()));
+
+        //Open json file and remove it from there
+        PersistData persistData = new PersistData();
+        persistData.removeJsonFlight("flight.json", flights);
     }
 
     public void showFlightList(){
@@ -130,10 +137,10 @@ public class Company {
         }
     }
 
-    public Flight getFlightByUserDNI(int dni){
+    public Flight getFlightById(int id){
         Flight f = new Flight();
         for(Flight flight : flights){
-            if(flight.getClient().getDni() == dni){
+            if(flight.getID() == id){
                 f = flight;
             }
         }
@@ -141,6 +148,12 @@ public class Company {
     }
 
     public List<Flight> getFlights() {
-        return flights;
+        List<Flight>flightsFromFile = new ArrayList<>();
+
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        flightsFromFile = persistData.Json2Flight("flight.json");
+        this.flights = flightsFromFile;
+        return flightsFromFile;
     }
 }

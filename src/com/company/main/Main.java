@@ -12,27 +12,15 @@ import java.awt.event.WindowEvent;
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-	// write your code here
 
-        /*User u = new User();
-        Company c = new Company();
+        //Create company and load our lists with the file information
+        Company company = Company.getCompany();
+        company.getUsers();
+        company.getPlanes();
+        company.getFlights();
 
-        GoldPlane gold1 = new GoldPlane(1000,300,950,"motor",10,true);
 
-        c.addPlane(gold1);
-
-        u.registerUser();
-
-        c.addUser(u);
-
-        System.out.println(u);
-
-        u.hireFlight(c);
-
-        Flight f = c.getFlightByUserDNI(u.getDni());
-        System.out.println("Usuario del vuelo: " + f.getClient().getName() + " " + f.getClient().getSurname());
-        System.out.println(f.getTotalCost());*/
-
+        //Now, invoke the swing interface
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         SwingUtilities.invokeLater(new Runnable() {
