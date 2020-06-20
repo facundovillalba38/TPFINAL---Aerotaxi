@@ -2,10 +2,8 @@ package com.company.main;
 
 import com.company.company.Company;
 import com.company.plane.Plane;
-import com.company.user.User;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -58,9 +56,9 @@ public class PlaneListWindow extends JFrame {
             }
         });
 
-
-
     }
+
+
 
 
 }

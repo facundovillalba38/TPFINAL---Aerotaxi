@@ -4,7 +4,7 @@ public class SilverPlane extends Plane{
     private static double fare = 4000;
 
     public SilverPlane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, boolean wifi) {
-        super(fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, true, wifi);
+        super("Silver", fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, true, wifi);
 
     }
 

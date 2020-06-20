@@ -16,11 +16,11 @@ public class Plane {
     private boolean busy;
     private boolean catering;
     private boolean wifi;
-
+    private String type;
 
     public Plane(){}
 
-    public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare, boolean catering, boolean wifi) {
+    public Plane(String type, double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare, boolean catering, boolean wifi) {
         this.id = getLastPlaneId();
         this.fuelCapacity = fuelCapacity;
         this.costKm = costKm;
@@ -31,6 +31,7 @@ public class Plane {
         this.catering = catering;
         this.wifi = wifi;
         this.busy = false;
+        this.type = type;
     }
 
     private int getLastPlaneId(){
@@ -123,9 +124,14 @@ public class Plane {
         this.wifi = wifi;
     }
 
+    public String getType(){
+        return this.type;
+    }
+
     @Override
     public String toString(){
-        return "Avión ID: " + this.getId() + " - Cantidad pasajeros máxima: " + this.getPassengerCapacity() +
-                " - Ocupado: " + this.isBusy();
+        return "Avión ID: " + this.getId()  + " - Tipo: " + this.getType() +
+                " - Cantidad pasajeros máxima: " + this.getPassengerCapacity() +
+                " - Wifi: " + this.getWifi();
     }
 }

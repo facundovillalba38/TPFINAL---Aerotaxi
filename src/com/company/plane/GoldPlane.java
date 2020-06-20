@@ -6,7 +6,7 @@ public class GoldPlane extends Plane {
     public GoldPlane(){}
 
     public GoldPlane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, Boolean wifi) {
-        super(fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, true, wifi);
+        super("Gold", fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, true, wifi);
     }
 
 

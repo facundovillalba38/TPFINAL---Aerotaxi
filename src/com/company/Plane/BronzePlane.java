@@ -4,7 +4,7 @@ public class BronzePlane extends Plane {
     private static double fare = 3000;
 
     public BronzePlane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers) {
-        super(fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, false, false);
+        super("Bronze", fuelCapacity, costKm, maxSpeed, engineType, passengers, fare, false, false);
     }
 
     public static double getFare() {
