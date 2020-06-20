@@ -149,7 +149,7 @@ public class PlaneWindow extends JFrame {
             error = true;
         }
 
-        if(!yesWifiBtn.isSelected() && !noWifiBtn.isSelected()){
+        if(goldBtn.isSelected() && !yesWifiBtn.isSelected() && !noWifiBtn.isSelected()){
             error = true;
         }
 
