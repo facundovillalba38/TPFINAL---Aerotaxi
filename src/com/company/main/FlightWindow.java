@@ -6,18 +6,23 @@ import com.company.flight.Destination;
 import com.company.flight.Flight;
 import com.company.plane.Plane;
 import com.company.user.User;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 
 public class FlightWindow extends JFrame {
     private JPanel flightPanel = new JPanel();
     private JTextField dateTxt = new JTextField();
+    private JDateChooser calendar = new JDateChooser();
     private JTextField companionTxt = new JTextField();
     private JLabel totalCostLbl = new JLabel();
     private JRadioButton bsasBtn = new JRadioButton();
@@ -93,12 +98,13 @@ public class FlightWindow extends JFrame {
 
         //SECOND ROW -- DATE TXT
 
-        dateLbl.setText("Fecha (yyyy-mm-dd):");
+        dateLbl.setText("Fecha:");
         dateLbl.setBounds(x1, 100, 120,height);
         flightPanel.add(dateLbl);
 
-        dateTxt.setBounds(160, 100,75,height);
-        flightPanel.add(dateTxt);
+        calendar.setBounds(100, 100, 100, height);
+        calendar.setDateFormatString("yyyy-MM-dd");
+        flightPanel.add(calendar);
 
         //THIRD ROW -- ORIGIN BUTTONS
 
@@ -210,11 +216,10 @@ public class FlightWindow extends JFrame {
 
                 } else {
 
-                    //Get actual date (yyyy-mm-dd)
-                    LocalDate date = LocalDate.now();
-
-                    LocalDate dateFlight = LocalDate.parse(dateTxt.getText());
+                    //PARSING CALENDAR TO LOCALDATE
+                    LocalDate dateFlight = calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     Boolean exist = false;
+                    System.out.println("Fecha: " + dateFlight);
 
                     //Get passengers
                     int passengers = Integer.parseInt(companionTxt.getText());
