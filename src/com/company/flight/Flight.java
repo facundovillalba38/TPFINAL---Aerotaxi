@@ -5,11 +5,11 @@ import com.company.plane.Plane;
 import com.company.user.User;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Flight {
     private int id;
-    private static int countId = 0;
     private User client;
     private LocalDate departureDate;
     private Destination originDestination;
@@ -18,8 +18,24 @@ public class Flight {
     private Plane planeCategory;
     private double totalCost;
 
-    public Flight() {
-        this.id = this.countId++;
+    public Flight() {}
+
+    public void setId(){
+        this.id = getLastFlightId();
+    }
+
+    private int getLastFlightId(){
+        int lastId = 0;
+
+        Company company = Company.getCompany();
+        List<Flight> flights = company.getFlights();
+
+        if(flights.size() > 0){
+            lastId = flights.get(flights.size()-1).getID();
+            lastId++;
+        }
+
+        return lastId;
     }
 
     public int getID(){

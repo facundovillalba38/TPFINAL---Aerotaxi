@@ -1,10 +1,12 @@
 package com.company.plane;
 
-import java.util.UUID;
+
+import com.company.company.Company;
+
+import java.util.List;
 
 public class Plane {
     private int id;
-    private static int countId = 0;
     private double fuelCapacity;
     private double costKm;
     private double maxSpeed;
@@ -19,7 +21,7 @@ public class Plane {
     public Plane(){}
 
     public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare, boolean catering, boolean wifi) {
-        this.id = this.countId++;
+        this.id = getLastPlaneId();
         this.fuelCapacity = fuelCapacity;
         this.costKm = costKm;
         this.maxSpeed = maxSpeed;
@@ -29,6 +31,20 @@ public class Plane {
         this.catering = catering;
         this.wifi = wifi;
         this.busy = false;
+    }
+
+    private int getLastPlaneId(){
+        int lastId = 0;
+
+        Company company = Company.getCompany();
+        List<Plane> planes = company.getPlanes();
+
+        if(planes.size() > 0){
+            lastId = planes.get(planes.size()-1).getId();
+            lastId++;
+        }
+
+        return lastId;
     }
 
     public int getId(){

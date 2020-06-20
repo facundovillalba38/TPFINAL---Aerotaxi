@@ -48,19 +48,19 @@ public class FlightWindow extends JFrame {
         super("Reserva de Vuelos");
 
         Company c = Company.getCompany();
-        Flight f = new Flight();
+
 
         flightPanel.setLayout(null);
         this.getContentPane().add(flightPanel);
 
         validateCityBtn();
 
-        setWindow(c, f);
+        setWindow(c);
 
     }
 
 
-    private void setWindow(Company c, Flight f){
+    private void setWindow(Company c){
 
         int x1 = 40, height = 25;
 
@@ -228,6 +228,10 @@ public class FlightWindow extends JFrame {
                     Company company = Company.getCompany();
                     List<Flight> flights = company.getFlights();
 
+                    //CREATE FLIGHT INSTANCE
+                    Flight newFlight = new Flight();
+                    newFlight.setId();
+
                     //Occupation verification
                     if (passengers <= planeSelectedOccupation) {
                         if(!flights.isEmpty()){
@@ -243,7 +247,7 @@ public class FlightWindow extends JFrame {
                                 JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
                             }else{  // if the origin != destination
-                                f.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
                                 JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
@@ -251,7 +255,7 @@ public class FlightWindow extends JFrame {
                             JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
                         }else{  // if the origin != destination
-                            f.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                            newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
                             JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                         }
 
@@ -262,7 +266,7 @@ public class FlightWindow extends JFrame {
                     }
 
                     //Set Total Cost Label
-                    totalCostLbl.setText("$ " + String.valueOf(f.getTotalCost()));
+                    totalCostLbl.setText("$ " + String.valueOf(newFlight.getTotalCost()));
                 }
             }
         });
