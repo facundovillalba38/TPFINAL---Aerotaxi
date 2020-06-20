@@ -88,9 +88,12 @@ public class CompleteAllFieldsException extends Exception {
             message += "Debes elegir un avión.\n";
         }
 
-        if(validateWifiBtn() == false){
-            message += "Debes seleccionar wifi.\n";
+        if(goldBtn.isSelected()){
+            if(validateWifiBtn() == false){
+                message += "Debes seleccionar wifi.\n";
+            }
         }
+
 
         if(getFuelTxt().getText().isEmpty()){
             message += "Debes completar la casilla de combustible.\n";

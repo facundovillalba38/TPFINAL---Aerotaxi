@@ -23,7 +23,7 @@ public class PlaneListWindow extends JFrame {
         Company company = Company.getCompany();
         List<Plane> planes = company.getPlanes();
         for(Plane p : planes){
-            listModel.addElement(p + " - ID: " + p.getId());
+            listModel.addElement(p);
         }
 
         planeJlist = new JList(listModel);

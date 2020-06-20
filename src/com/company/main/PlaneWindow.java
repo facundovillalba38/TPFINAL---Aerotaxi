@@ -50,6 +50,8 @@ public class PlaneWindow extends JFrame {
         engineGroup.add(pistonsEngineBtn);
 
 
+        disableWifi();
+
         registerPlaneBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,6 +149,10 @@ public class PlaneWindow extends JFrame {
             error = true;
         }
 
+        if(!yesWifiBtn.isSelected() && !noWifiBtn.isSelected()){
+            error = true;
+        }
+
         if(!error) {
 
             if (goldBtn.isSelected()) {
@@ -183,6 +189,33 @@ public class PlaneWindow extends JFrame {
     private boolean validateWifi(){
         boolean wifi = yesWifiBtn.isSelected() ? true : false;
         return wifi;
+    }
+
+    private void disableWifi(){
+
+        goldBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                yesWifiBtn.setEnabled(true);
+                noWifiBtn.setEnabled(true);
+            }
+        });
+
+        silverBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                yesWifiBtn.setEnabled(false);
+                noWifiBtn.setEnabled(false);
+            }
+        });
+
+       bronzeBtn.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               yesWifiBtn.setEnabled(false);
+               noWifiBtn.setEnabled(false);
+           }
+       });
     }
 
     private String engineSelection(){
