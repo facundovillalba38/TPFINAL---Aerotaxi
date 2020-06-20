@@ -12,10 +12,13 @@ public class Plane {
     private int passengerCapacity;
     private double planeFare;
     private boolean busy;
+    private boolean catering;
+    private boolean wifi;
+
 
     public Plane(){}
 
-    public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare) {
+    public Plane(double fuelCapacity, double costKm, double maxSpeed, String engineType, int passengers, double planeFare, boolean catering, boolean wifi) {
         this.id = this.countId++;
         this.fuelCapacity = fuelCapacity;
         this.costKm = costKm;
@@ -23,6 +26,8 @@ public class Plane {
         this.engineType = engineType;
         this.passengerCapacity = passengers;
         this.planeFare = planeFare;
+        this.catering = catering;
+        this.wifi = wifi;
         this.busy = false;
     }
 
@@ -86,6 +91,21 @@ public class Plane {
         this.busy = busy;
     }
 
+    public Boolean getCatering() {
+        return catering;
+    }
+
+    public void setCatering(Boolean catering) {
+        this.catering = catering;
+    }
+
+    public Boolean getWifi() {
+        return wifi;
+    }
+
+    public void setWifi(Boolean wifi) {
+        this.wifi = wifi;
+    }
 
     @Override
     public String toString(){

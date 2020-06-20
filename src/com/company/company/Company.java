@@ -1,8 +1,10 @@
 package com.company.company;
 
+import com.company.data.PersistData;
 import com.company.flight.Flight;
 import com.company.plane.Plane;
 import com.company.user.User;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,10 @@ public class Company {
 
     public void addUser(User u){
         users.add(u);
+
+        //Persist user information
+        PersistData persistData = new PersistData();
+        persistData.User2Json(users, "user.json");
     }
 
     public void deleteUser(User u){
@@ -44,12 +50,26 @@ public class Company {
         }
     }
 
-    public List<User> getUsers() { return users; }
+    public List<User> getUsers() {
+        List<User>usersFromFile = new ArrayList<User>();
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        usersFromFile = persistData.Json2User("user.json");
+        this.users = usersFromFile;
+        return usersFromFile;
+    }
+
+
+
 
     //PLANES
 
     public void addPlane(Plane p){
         planes.add(p);
+
+        //Persist user information
+        PersistData persistData = new PersistData();
+        persistData.Plane2Json(planes, "plane.json");
     }
 
     public void deletePlane(Plane p){
@@ -81,17 +101,34 @@ public class Company {
     }
 
     public List<Plane> getPlanes() {
-        return planes;
+        List<Plane>planesFromFile = new ArrayList<>();
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        planesFromFile = persistData.Json2Plane("plane.json");
+        this.planes = planesFromFile;
+        return planesFromFile;
+
     }
+
+
+
 
     //FLIGHTS
 
     public void addFlight(Flight f){
         flights.add(f);
+
+        PersistData persistData = new PersistData();
+        persistData.Flight2Json(flights, "flight.json");
     }
 
     public void deleteFlight(Flight f){
-        flights.remove(f);
+        //Remove it from list
+        this.flights.remove(getFlightById(f.getID()));
+
+        //Open json file and remove it from there
+        PersistData persistData = new PersistData();
+        persistData.removeJsonFlight("flight.json", flights);
     }
 
     public void showFlightList(){
@@ -100,10 +137,10 @@ public class Company {
         }
     }
 
-    public Flight getFlightByUserDNI(int dni){
+    public Flight getFlightById(int id){
         Flight f = new Flight();
         for(Flight flight : flights){
-            if(flight.getClient().getDni() == dni){
+            if(flight.getID() == id){
                 f = flight;
             }
         }
@@ -111,6 +148,12 @@ public class Company {
     }
 
     public List<Flight> getFlights() {
-        return flights;
+        List<Flight>flightsFromFile = new ArrayList<>();
+
+        //Get persisted user information
+        PersistData persistData = new PersistData();
+        flightsFromFile = persistData.Json2Flight("flight.json");
+        this.flights = flightsFromFile;
+        return flightsFromFile;
     }
 }

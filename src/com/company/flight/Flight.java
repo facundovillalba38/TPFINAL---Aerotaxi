@@ -178,14 +178,12 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Vuelo: " + this.getID() +
-                "\nUsuario: " + this.getClient().getSurname() + " - DNI: " + this.getClient().getDni() +
-                "\nFecha: " + this.getDepartureDate() +
-                "\nSalida: " + this.getOriginDestination() +
-                "\nLlegada: " + this.getFinalDestination() +
-                "\nPasajeros: " + this.getPassengers() +
-                "\nAvión: " + this.getPlaneCategory() +
-                "\nPrecio final: " + this.getTotalCost();
+        return "ID: " + this.getID() +
+                "\n- " + this.getClient().getSurname() +
+                "\n - " + this.getDepartureDate() +
+                "\n De: " + this.getOriginDestination() +
+                "\n A: " + this.getFinalDestination() +
+                "\n $ " + this.getTotalCost();
     }
 }
 
