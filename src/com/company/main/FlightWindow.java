@@ -249,8 +249,20 @@ public class FlightWindow extends JFrame {
                                 JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
                             }else{  // if the origin != destination
-                                newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
-                                JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                List<Flight> cFlights = c.getFlights();
+                                Boolean sameDay = false;
+                                for(Flight f : cFlights){
+                                    if(f.getDepartureDate() == dateFlight && f.getPlaneCategory().getId() == ((Plane) planeBox.getSelectedItem()).getId()){
+                                        sameDay = true;
+                                    }
+                                }
+                                if(sameDay == false){
+                                    newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                    JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "Ya hay un vuelo para el avión seleccionado en esa fecha", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+
                             }
                         }
                         else if(getSelectedOriginCity() == getSelectedDestinyCity()){
