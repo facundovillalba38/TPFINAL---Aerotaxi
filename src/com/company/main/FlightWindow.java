@@ -11,8 +11,11 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -215,8 +218,6 @@ public class FlightWindow extends JFrame {
 
                     //PARSING CALENDAR TO LOCALDATE
                     LocalDate dateFlight = calendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    Boolean exist = false;
-                    System.out.println("Fecha: " + dateFlight);
 
                     //CHECK IF BOOK FLIGHT DATE IS POSIBLE -> if it's 0, date is today. If it's greater dateFlight is greater than today
 
@@ -239,6 +240,7 @@ public class FlightWindow extends JFrame {
                         newFlight.setId();
 
                         //Occupation verification
+                        Boolean exist = false;
                         if (passengers <= planeSelectedOccupation) {
                             if (!flights.isEmpty()) {
                                 for (Flight f : flights) {
