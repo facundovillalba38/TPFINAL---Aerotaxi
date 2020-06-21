@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
 
 public class FlightListWindow extends JFrame{
@@ -69,24 +70,33 @@ public class FlightListWindow extends JFrame{
 
                 Flight cancelFlight = (Flight) flightToCancel.getSelectedItem();
                 Company company = Company.getCompany();
-                company.deleteFlight(cancelFlight);
 
-                //Show message
-                String message = "El vuelo a nombre de " + cancelFlight.getClient().getName() + " " +
-                        cancelFlight.getClient().getSurname() + " ha sido cancelado exitosamente.";
+                //EVALUATE IF FLIGHT IS MORE THAN 24 HOURS TO CANCEL
 
-                JOptionPane.showMessageDialog(null, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                if (cancelFlight.getDepartureDate().compareTo(LocalDate.now()) > 0) {
 
-                //Return to main page
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        JFrame mainWindow = new MainWindow();
-                        WindowSetting windowSetting = new WindowSetting();
-                        windowSetting.windowSettings(mainWindow);
-                        dispose();
-                    }
-                });
+                    company.deleteFlight(cancelFlight);
+
+                    //Show message
+                    String message = "El vuelo a nombre de " + cancelFlight.getClient().getName() + " " +
+                            cancelFlight.getClient().getSurname() + " ha sido cancelado exitosamente.";
+
+                    JOptionPane.showMessageDialog(null, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    //Return to main page
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            JFrame mainWindow = new MainWindow();
+                            WindowSetting windowSetting = new WindowSetting();
+                            windowSetting.windowSettings(mainWindow);
+                            dispose();
+                        }
+                    });
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se puede cancelar un vuelo con menos de 24 horas de anticipación.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
