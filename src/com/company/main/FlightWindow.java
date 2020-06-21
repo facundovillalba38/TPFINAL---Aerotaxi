@@ -218,69 +218,75 @@ public class FlightWindow extends JFrame {
                     Boolean exist = false;
                     System.out.println("Fecha: " + dateFlight);
 
-                    //Get passengers
-                    int passengers = Integer.parseInt(companionTxt.getText());
-                    passengers++;    //Companion plus de person who books the flight = total passengers!
+                    //CHECK IF BOOK FLIGHT DATE IS POSIBLE -> if it's 0, date is today. If it's greater dateFlight is greater than today
+
+                    if (dateFlight.compareTo(LocalDate.now()) >= 0) {
+
+                        //Get passengers
+                        int passengers = Integer.parseInt(companionTxt.getText());
+                        passengers++;    //Companion plus de person who books the flight = total passengers!
 
 
-                    //BOOK FLIGHT METHOD
+                        //BOOK FLIGHT METHOD
 
-                    Plane planeSelected = (Plane) planeBox.getSelectedItem();
-                    int planeSelectedOccupation = planeSelected.getPassengerCapacity();
-                    Company company = Company.getCompany();
-                    List<Flight> flights = company.getFlights();
+                        Plane planeSelected = (Plane) planeBox.getSelectedItem();
+                        int planeSelectedOccupation = planeSelected.getPassengerCapacity();
+                        Company company = Company.getCompany();
+                        List<Flight> flights = company.getFlights();
 
-                    //CREATE FLIGHT INSTANCE
-                    Flight newFlight = new Flight();
-                    newFlight.setId();
+                        //CREATE FLIGHT INSTANCE
+                        Flight newFlight = new Flight();
+                        newFlight.setId();
 
-                    //Occupation verification
-                    if (passengers <= planeSelectedOccupation) {
-                        if(!flights.isEmpty()){
-                            for(Flight f : flights){
-                                if(f.getDepartureDate().equals(dateFlight)){
-                                    exist = true;
+                        //Occupation verification
+                        if (passengers <= planeSelectedOccupation) {
+                            if (!flights.isEmpty()) {
+                                for (Flight f : flights) {
+                                    if (f.getDepartureDate().equals(dateFlight)) {
+                                        exist = true;
 
-                                }
-                            }
-                            if(exist){
-                                JOptionPane.showMessageDialog(null, "Ya hay un vuelo resevado para la fecha ingresada.", "Error", JOptionPane.ERROR_MESSAGE);
-                            }else if(getSelectedOriginCity() == getSelectedDestinyCity()){
-                                JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
-
-                            }else{  // if the origin != destination
-                                List<Flight> cFlights = c.getFlights();
-                                Boolean sameDay = false;
-                                for(Flight f : cFlights){
-                                    if(f.getDepartureDate() == dateFlight && f.getPlaneCategory().getId() == ((Plane) planeBox.getSelectedItem()).getId()){
-                                        sameDay = true;
                                     }
                                 }
-                                if(sameDay == false){
-                                    newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
-                                    JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                                }else{
-                                    JOptionPane.showMessageDialog(null, "Ya hay un vuelo para el avión seleccionado en esa fecha", "Error", JOptionPane.ERROR_MESSAGE);
+                                if (exist) {
+                                    JOptionPane.showMessageDialog(null, "Ya hay un vuelo resevado para la fecha ingresada.", "Error", JOptionPane.ERROR_MESSAGE);
+                                } else if (getSelectedOriginCity() == getSelectedDestinyCity()) {
+                                    JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                } else {  // if the origin != destination
+                                    List<Flight> cFlights = c.getFlights();
+                                    Boolean sameDay = false;
+                                    for (Flight f : cFlights) {
+                                        if (f.getDepartureDate() == dateFlight && f.getPlaneCategory().getId() == ((Plane) planeBox.getSelectedItem()).getId()) {
+                                            sameDay = true;
+                                        }
+                                    }
+                                    if (sameDay == false) {
+                                        newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                        JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Ya hay un vuelo para el avión seleccionado en esa fecha", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+
                                 }
+                            } else if (getSelectedOriginCity() == getSelectedDestinyCity()) {
+                                JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
+                            } else {  // if the origin != destination
+                                newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
+                                JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                             }
-                        }
-                        else if(getSelectedOriginCity() == getSelectedDestinyCity()){
-                            JOptionPane.showMessageDialog(null, "La ciudad de origen no puede ser la misma que la ciudad de destino.", "Error", JOptionPane.ERROR_MESSAGE);
 
-                        }else{  // if the origin != destination
-                            newFlight.bookFlightSwing(c, (User) userBox.getSelectedItem(), dateFlight, getSelectedOriginCity(), getSelectedDestinyCity(), passengers, (Plane) planeBox.getSelectedItem());
-                            JOptionPane.showMessageDialog(null, "La reserva se ha realizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
 
-
+                        //Set Total Cost Label
+                        totalCostLbl.setText("$ " + String.valueOf(newFlight.getTotalCost()));
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "El avión elegido no puede transportar esa cantidad de pasajeros.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "La fecha elegida no es posible.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
-                    //Set Total Cost Label
-                    totalCostLbl.setText("$ " + String.valueOf(newFlight.getTotalCost()));
                 }
             }
         });
